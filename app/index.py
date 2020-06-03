@@ -18,10 +18,11 @@ def home():
 
 
 def get_footer():
-    return '<p>SEDME</body></html>'
+    return '<p>SEDME</font></body></html>'
 
 def get_header():
-    return '<html><head><title>NASA Image SlideShow</title><meta http-equiv=refresh content=20></head><body>'
+    return '<html><head><title>NASA Image SlideShow</title><meta http-equiv=refresh content=20></head>' + \
+           '<body bgcolor="black"><font color="white">'
 
 def get_image():    
     image_num = str(random.randint(1, image_count))
