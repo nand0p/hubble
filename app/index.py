@@ -24,8 +24,10 @@ def get_header():
     return '<html><head><title>NASA Image SlideShow</title><meta http-equiv=refresh content=20>' + \
            '<script async src="https://www.googletagmanager.com/gtag/js?id=UA-32710227-3"></script>' + \
            '<script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} ' + \
-           'gtag("js", new Date()); gtag("config", "UA-32710227-3"); </script></head>' + \
-           '<body bgcolor="black"><font color="white">'
+           'gtag("js", new Date()); gtag("config", "UA-32710227-3"); </script>' + \
+           '<script data-ad-client="ca-pub-9811914588681081" async ' + \
+           'src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>' + \
+           '</head><body bgcolor="black"><font color="white">'
 
 def get_image():    
     image_num = str(random.randint(1, image_count))
