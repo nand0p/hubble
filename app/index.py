@@ -18,7 +18,8 @@ def home():
 
 
 def get_footer():
-    return '<p>SEDME</font></body></html>'
+    return '<p>This site refreshes every 20 seconds with a new image from the NASA Hubble Telescope archives' + \
+           '<p>SEDME</font></body></html>'
 
 def get_header():
     return '<html><head><title>NASA Image SlideShow</title><meta http-equiv=refresh content=20>' + \
