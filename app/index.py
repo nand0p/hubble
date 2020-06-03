@@ -21,7 +21,10 @@ def get_footer():
     return '<p>SEDME</font></body></html>'
 
 def get_header():
-    return '<html><head><title>NASA Image SlideShow</title><meta http-equiv=refresh content=20></head>' + \
+    return '<html><head><title>NASA Image SlideShow</title><meta http-equiv=refresh content=20>' + \
+           '<script async src="https://www.googletagmanager.com/gtag/js?id=UA-32710227-3"></script>' + \
+           '<script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} ' + \
+           'gtag("js", new Date()); gtag("config", "UA-32710227-3"); </script></head>' + \
            '<body bgcolor="black"><font color="white">'
 
 def get_image():    
