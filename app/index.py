@@ -19,6 +19,10 @@ def home():
 
 def get_footer():
     return '<p>This site refreshes every 20 seconds with a new image from the NASA Hubble Telescope archives' + \
+           '<p>Source Code: <a href=https://github.com/nand0p/hubble>https://github.com/nand0p/hubble</a>' + \
+           '<p>If you find this useful, please contribute:<br><b>' + \
+           'BTC: 112JJvxsvRYn4QtpWJqZmLsTbPEG7aPsdB<br>' + \
+           'ETH: 0x5b857cc1103c82384457BACdcd6E2a9FCD0b7e2A</b>' + \
            '<p>SEDME</font></body></html>'
 
 def get_header():
