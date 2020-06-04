@@ -42,7 +42,7 @@ def get_image():
         if image_url.endswith('tif') or image_url.endswith('tiff') or image_url.endswith('pdf') or image_url.endswith('epub'):
             image_url = rez['image_files'][-2]['file_url']
             if image_url.endswith('tif') or image_url.endswith('tiff') or image_url.endswith('pdf') or image_url.endswith('epub'):
-                image_url = rez['image_files'][-3]['file_url']
+                image_url = '//imgsrc.hubblesite.org/hvi/uploads/image_file/image_attachment/29288/STScI-H-spacecraft24-3072x2040.jpg'
     else:
         image_url = '//imgsrc.hubblesite.org/hvi/uploads/image_file/image_attachment/29288/STScI-H-spacecraft24-3072x2040.jpg'
     if rez.get('name'):
