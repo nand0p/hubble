@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, request
 import requests
 import random
 
@@ -25,7 +25,9 @@ def get_footer():
            '<p>If you find this useful, please contribute:<br><b>' + \
            'BTC: 112JJvxsvRYn4QtpWJqZmLsTbPEG7aPsdB<br>' + \
            'ETH: 0x5b857cc1103c82384457BACdcd6E2a9FCD0b7e2A</b>' + \
-           '<p>SEDME</font></body></html>'
+           '<p>SEDME -- Hex7 Internet Solutions<p><b>&copy;2020 </b>' + \
+           '<a target=_blank href=http://hex7.com><b>Hex 7 Internet Solutions</b></a><br>' + \
+           request.headers.get('User-Agent') + ' -- ' + get_ip() + '</font></body></html>'
 
 def get_header():
     return '<html><head><title>NASA Image SlideShow</title><meta http-equiv=refresh content=20>' + \
@@ -35,6 +37,12 @@ def get_header():
            '<script data-ad-client="ca-pub-9811914588681081" async ' + \
            'src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>' + \
            '</head><body bgcolor="black"><font color="white">'
+
+def get_ip():
+    if request.headers.getlist("X-Forwarded-For"):
+        return request.headers.getlist("X-Forwarded-For")[0]
+    else:
+        return request.remote_addr
 
 def get_image():    
     image_num = str(random.randint(1, image_count))
