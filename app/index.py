@@ -4,6 +4,7 @@ import random
 
 
 image_count = 4670
+image_show = 20
 api_endpoint = 'https://hubblesite.org/api/v3/image/'
 
 app = Flask(__name__)
@@ -12,13 +13,14 @@ app = Flask(__name__)
 @app.route('/')
 def home():
     html = get_header()
-    html += get_image()
+    for count in range(1, image_show):
+      html += get_image()
     html += get_footer()
     return html
 
 
 def get_footer():
-    return '<p>This site refreshes every 20 seconds with a new image from the NASA Hubble Telescope archives' + \
+    return '<p>This site refreshes every 20 seconds with new images from the NASA Hubble Telescope archives' + \
            '<p>Source Code: <a href=https://github.com/nand0p/hubble>https://github.com/nand0p/hubble</a>' + \
            '<p>If you find this useful, please contribute:<br><b>' + \
            'BTC: 112JJvxsvRYn4QtpWJqZmLsTbPEG7aPsdB<br>' + \
@@ -52,13 +54,13 @@ def get_image():
         image_name = rez['name']
     else:
         image_name = 'unnamed'
-    _html = str(image_num) + ' ' + image_name + '<br>'
-    _html += '<img src=https:' + image_url + ' height=95%><br>' + image_url + '<p>'
+    _html = '<b>' + str(image_num) + '</b> ' + image_name + '<br>'
+    _html += '<img src=https:' + image_url + ' height=95%><br>https:' + image_url + '<p>'
     if rez.get('description'):
-        _html += rez['description']
-    _html += '<p>'
+        _html += '<p>' + rez['description']
     if rez.get('credits'):
-        _html += rez['credits']
+        _html += '<p>Credits: ' + rez['credits']
+    _html += '<p><br><p><hr><hr><p><br>'
     return _html
 
 
