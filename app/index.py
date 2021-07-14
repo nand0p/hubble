@@ -13,10 +13,18 @@ app = Flask(__name__)
 @app.route('/')
 def home():
     html = get_header()
-    for count in range(1, image_show):
-      html += get_image()
-    html += get_footer()
-    return html
+
+    try:
+      rez = requests.get(api_endpoint)
+      for count in range(1, image_show):
+        html += get_image()
+      html += get_footer()
+      return html
+
+    except:
+      html += f'<h1>hubble api is down<p>{api_endpoint}<p>comeon nasa get with it.<p> what are you doing with our tax dollars? <p> not cool to just remove api. <p>this was working for years. <p> at the very least have endpoint state you are no longer supporting it. <p>404 is for amateurs. <p> https://public-apis.io/hubblesite-api'
+      return html
+
 
 
 def get_footer():
