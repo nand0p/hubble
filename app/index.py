@@ -49,7 +49,7 @@ def get_header():
 
 def get_ip():
     if request.headers.get("X-Forwarded-For"):
-        return request.headers.get("X-Forwarded-For").split(,)[0]
+        return request.headers.get("X-Forwarded-For").split(',')[0]
     else:
         return request.remote_addr
 
