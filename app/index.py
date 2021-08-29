@@ -4,8 +4,9 @@ import random
 
 
 image_count = 4670
-image_show = 20
-api_endpoint = 'https://hubblesite.org/api/v3/image/'
+image_show = 5
+#api_endpoint = 'https://hubblesite.org/api/v3/image/'
+api_endpoint = 'https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY&count='  + str(image_show)
 
 app = Flask(__name__)
 
@@ -17,12 +18,12 @@ def home():
     try:
       rez = requests.get(api_endpoint)
       for count in range(1, image_show):
-        html += get_image()
+        html += get_image(rez[count])
       html += get_footer()
       return html
 
     except:
-      html += f'<h1>hubble api is down<p>{api_endpoint}<p>comeon nasa get with it.<p> what are you doing with our tax dollars? <p> not cool to just remove api. <p>this was working for years. <p> at the very least have endpoint state you are no longer supporting it. <p>404 is for amateurs. <p> https://public-apis.io/hubblesite-api'
+      html += 'service not available'
       return html
 
 
@@ -47,35 +48,18 @@ def get_header():
            '</head><body bgcolor="black"><font color="white">'
 
 def get_ip():
-    if request.headers.getlist("X-Forwarded-For"):
-        return request.headers.getlist("X-Forwarded-For")[0]
+    if request.headers.get("X-Forwarded-For"):
+        return request.headers.get("X-Forwarded-For").split(,)[0]
     else:
         return request.remote_addr
 
-def get_image():    
-    image_num = str(random.randint(1, image_count))
-    rez = requests.get(api_endpoint + image_num).json()
-    if rez.get('image_files'):
-        image_url = rez['image_files'][-1]['file_url']
-        if image_url.endswith('tif') or image_url.endswith('tiff') or image_url.endswith('pdf') or image_url.endswith('epub'):
-            if len(rez['image_files']) > 1:
-                image_url = rez['image_files'][-2]['file_url']
-            else:
-                image_url = '//imgsrc.hubblesite.org/hvi/uploads/image_file/image_attachment/29288/STScI-H-spacecraft24-3072x2040.jpg'
-            if image_url.endswith('tif') or image_url.endswith('tiff') or image_url.endswith('pdf') or image_url.endswith('epub'):
-                image_url = '//imgsrc.hubblesite.org/hvi/uploads/image_file/image_attachment/29288/STScI-H-spacecraft24-3072x2040.jpg'
-    else:
-        image_url = '//imgsrc.hubblesite.org/hvi/uploads/image_file/image_attachment/29288/STScI-H-spacecraft24-3072x2040.jpg'
-    if rez.get('name'):
-        image_name = rez['name']
-    else:
-        image_name = 'unnamed'
-    _html = '<b>' + str(image_num) + '</b> ' + image_name + '<br>'
-    _html += '<img src=https:' + image_url + ' height=95%><br>https:' + image_url + '<p>'
-    if rez.get('description'):
-        _html += '<p>' + rez['description']
-    if rez.get('credits'):
-        _html += '<p>Credits: ' + rez['credits']
+def get_image(rez):
+    _html = '<b>' + rez.get('title') + '</b> ' + '<br>'
+    _html += '<img src=' + rez.get('url') + ' height=95%><br>' + rez.get('url') + '<p>'
+    if rez.get('explanation'):
+        _html += '<p>' + rez.get('explanation')
+    if rez.get('copyright'):
+        _html += '<p>Credits: ' + rez.get('copyright')
     _html += '<p><br><p><hr><hr><p><br>'
     return _html
 
